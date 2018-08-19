@@ -9,13 +9,13 @@ G1pol=feedparser.parse('http://pox.globo.com/rss/g1/politica')
 G1eco=feedparser.parse('http://pox.globo.com/rss/g1/economia/')
 
 #Tratamento dos títulos (retirar vogais, preposições) deixando apenas palavras chaves
-def filtra(titulo): #filtra recebe uma frase (manchete da notícia) e trata-a conforme explicado duranto o código
+def filtra(titulo): #filtra recebe uma frase (manchete da notícia) e trata-a conforme explicado durante o código
     titulo = titulo.lower()
     lista = titulo.split(' ') # split separa uma string em várias substrings e guarda numa lista
     for i in range(len(lista)):
         lista[i] = lista[i].replace('\'', '') # tira todas aspas
     
-    #retorna um vetor de 'palavra' tal que 'palavra' são todos os elementos de 'lista' que: 1-Não estão em palRemov; 2-Não contêm digitos
+    #retorna um vetor de 'palavra' tal que 'palavra' são todos os elementos de 'lista' que 1-Não estão em palRemov; 2-Não contêm digitos
     return [palavra for palavra in lista if ((palavra not in palRemov) and palavra.isalpha())]
 
 def naive_bayes(dicio, noticia): # recebe um dicionário e uma lista com as palavras da notícia
@@ -74,7 +74,3 @@ print('proEco: ' + str(probEco))
 
 dicio = {probTec:'Tecnologia', probPol:'Política', probEco:'Economia'}
 print(dicio[max(dicio.keys())]) # imprime o assunto cuja probabilidade é máxima
-
-
-A,B,C
-P(A and B and C) = P(A)*P(B)*P(C)
