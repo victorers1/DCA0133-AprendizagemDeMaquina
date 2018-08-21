@@ -8,69 +8,63 @@ G1tec=feedparser.parse('http://pox.globo.com/rss/g1/tecnologia/')
 G1pol=feedparser.parse('http://pox.globo.com/rss/g1/politica')
 G1eco=feedparser.parse('http://pox.globo.com/rss/g1/economia/')
 
-#Tratamento dos títulos (retirar vogais, preposições) deixando apenas palavras chaves
-def filtra(titulo): #filtra recebe uma frase (manchete da notícia) e trata-a conforme explicado durante o código
-    titulo = titulo.lower()
-    lista = titulo.split(' ') # split separa uma string em várias substrings e guarda numa lista
+def filtra(titulo): # Filtra recebe uma frase (manchete da notícia) e trata-a conforme explicado durante o código
+    titulo = titulo.lower() # Remove letras maiúsculas
+    lista = titulo.split(' ') # Split separa uma string em várias substrings e guarda numa lista
     for i in range(len(lista)):
-        lista[i] = lista[i].replace('\'', '') # tira todas aspas
+        lista[i] = lista[i].replace('\'', '') # Tira todas aspas
     
-    #retorna um vetor de 'palavra' tal que 'palavra' são todos os elementos de 'lista' que 1-Não estão em palRemov; 2-Não contêm digitos
+    # Retorna uma LISTA de 'palavra' tal que 'palavra' são todos os elementos de 'lista' que 1-Não estão em palRemov; 2-Não contêm digitos
     return [palavra for palavra in lista if ((palavra not in palRemov) and palavra.isalpha())]
 
-def naive_bayes(dicio, noticia): # recebe um dicionário e uma lista com as palavras da notícia
-    qtdPal=len(dicio.keys()) # Quantidade de palavras em dicio sem considerar frequências
-    qtdPalFreq=0 # Quantidade de palavras em dicio (considerando frequências)
+def naive_bayes(dicio, noticia): # Recebe um dicionário e uma lista com as palavras da notícia. Retorna a probabilidade da notícia estar relacionada com o dicionário
+    qtdPal=len(dicio.keys()) # Quantidade de palavras em dicio sem considerar a frequência de cada uma
+    qtdPalFreq=0 # Quantidade de palavras em dicio considerando frequências
     for pal in dicio:
         qtdPalFreq = qtdPalFreq+dicio[pal]
     prob=1 # Probabilidade inicial
     for palavra in noticia:
         if palavra in dicio.keys():
-            prob = prob*(dicio[palavra]/(qtdPal+qtdPalFreq))
+            prob = prob*(dicio[palavra]/(qtdPal+qtdPalFreq)) # Cálculo da prob. de uma palavra com freq. não nula
         else:
-            prob = prob*(1/(qtdPal+qtdPalFreq))
-    
+            prob = prob*(1/(qtdPal+qtdPalFreq)) # Aplicamos a normalização de Laplace para amostrar com prob. 0
     return prob
 
-def contagem(feedNoticia): # recebe um objeto do tipo 'feed' e cria a lista de palavras e o dicionário de frequências
-    dicio = {}
-    for post in feedNoticia.entries:
-        listaPalavra = filtra(post.title)
-        for palavra in listaPalavra:
-            if palavra in dicio.keys():
-                dicio[palavra] = dicio[palavra]+1
-            else:
-                dicio[palavra] = 2
-    return dicio
+def contagem(feedNoticia): # Recebe um objeto do tipo 'feed' e cria a lista de palavras e o dicionário de frequências
+    dicio = {} # Dicionário a ser preenchido
+    for post in feedNoticia.entries: # Para cada notícia recebida
+        listaPalavra = filtra(post.title) # Cria uma lista de palavras filtradas do título da notícia
+        for palavra in listaPalavra: # Para cada palavra no título da notícia
+            if palavra in dicio.keys(): # Se a palvra já é conhecida...
+                dicio[palavra] = dicio[palavra]+1 # Incremente a freq. de ocorrência
+            else: # Se é uma palavra nova...
+                dicio[palavra] = 2 # Adicione ao dicionário já com a freq. igual à 2, pois faremos a normalização de Laplace
+    return dicio # Retorna o dicionário com todas as frequências de ocorrência incrementadas em uma unidade 1 da real
 
 
-dicTec={} # dicio com frequência de cada palavra de tec. (d['palavra'] = freq de ocorrência)
-dicPol={}
-dicEco={}
-listTec=[] # lista de strings com palavras de manchetes de tecnologia (após a primeira filtragem de palavras)
-listPol=[]
-listEco=[]
+dicTec={} # Dicionário com frequência de cada palavra de tecnologia (dicTec['palavra'] = freq. de ocorrência)
+dicPol={} # Agora com freq. de cada palavra de política
+dicEco={} # E economia
 
-dicTec = contagem(G1tec)
-dicPol = contagem(G1pol)
-dicEco = contagem(G1eco)
+dicTec = contagem(G1tec) # 
+dicPol = contagem(G1pol) # Criação dos dicionários 
+dicEco = contagem(G1eco) #
 
-
-#Rebece nova notícia para classificar
-listNoticia = filtra(input('Digite uma manchete relacionada ou a Tecnologia ou Política ou Economia: '))
-
-#Testa se é de Tec.
-probTec = naive_bayes(dicTec, listNoticia)
-
-#Testa se é de Pol.
-probPol = naive_bayes(dicPol, listNoticia)
-        
-#Testa se é de Eco.
-probEco = naive_bayes(dicEco, listNoticia)
-
-print('proTec: ' + str(probTec))
-print('proPol: ' + str(probPol))
-print('proEco: ' + str(probEco))
-
-dicio = {probTec:'Tecnologia', probPol:'Política', probEco:'Economia'}
-print(dicio[max(dicio.keys())]) # imprime o assunto cuja probabilidade é máxima
+while True:
+    # Rebece nova notícia para classificar, filtra certas palavras e guarda numa lista
+    listNoticia = filtra(input('Digite uma manchete relacionada ou a Tecnologia ou Política ou Economia: '))
+    
+    #Calcula probabilidade de ser Tec.
+    probTec = naive_bayes(dicTec, listNoticia)
+    #Calcula probabilidade de ser Pol.
+    probPol = naive_bayes(dicPol, listNoticia)
+    #Calcula probabilidade de ser Eco.
+    probEco = naive_bayes(dicEco, listNoticia)
+    # A SOMA DAS PROBABILIDADES NÃO  SÃO IGUAL À 1
+    
+    print('proTec: ' + str(probTec)) #
+    print('proPol: ' + str(probPol)) # Os valores geralmente são bem pequenos
+    print('proEco: ' + str(probEco)) #
+    
+    dicio = {probTec:'Tecnologia', probPol:'Política', probEco:'Economia'}
+    print(dicio[max(dicio.keys())]) # Imprime o assunto cuja probabilidade é máxima
