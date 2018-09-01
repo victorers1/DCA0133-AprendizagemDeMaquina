@@ -66,7 +66,7 @@ while True:
     probPol = naive_bayes(dicPol, listNoticia)
     #Calcula probabilidade de ser Eco.
     probEco = naive_bayes(dicEco, listNoticia)
-    # A SOMA DAS PROBABILIDADES NÃO  SÃO IGUAL À 1
+    # A SOMA DAS PROBABILIDADES NÃO É IGUAL À 1
     
     print('proTec: ' + str(probTec)) #
     print('proPol: ' + str(probPol)) # Os valores geralmente são bem pequenos
