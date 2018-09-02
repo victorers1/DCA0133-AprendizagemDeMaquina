@@ -3,6 +3,8 @@
 # Inspiração: https://monkeylearn.com/blog/practical-explanation-naive-bayes-classifier/
 # CLASSIFICADOR DE SPAM PELO MÉTODO DE NAIVE-BAYES
 
+#from pathlib import Path
+
 # Palavras e caracteres a serem removidas das manchetes
 palRemov = ['"', 'sem', '\'', '.', 'só', 'à', 'os', 'com', 'como', 'Há', 'há', 'para', 'tem', 'têm', 'uma', 'uns',
             'umas', 'um', 'por', 'das', 'é', 'É', 'se', 'dos', 'Em', 'A', 'a', 'o', 'ao', 'e', 'O', 'do', 'da', 'de',
@@ -36,7 +38,7 @@ def naive_bayes(dicio, email):  # Recebe um dicionário e uma lista com as palav
     return prob
 
 
-def contagem(listEmail):  # Recebe uma lista com as palavras do email e cria o dicionário de frequências
+def contagem(listEmail):  # Recebe uma lista em que cada elemento é o conteúdo de um email
     dicio = {}  # Dicionário a ser preenchido
 
     for palavra in listEmail:  # Para cada palavra no título da notícia
@@ -47,6 +49,21 @@ def contagem(listEmail):  # Recebe uma lista com as palavras do email e cria o d
 
     return dicio  # Retorna o dicionário com todas as frequências de ocorrência incrementadas em uma unidade 1 da real
 
+caminhoSPAM = '/home/victor/Área de Trabalho/DCA0133-AprendizagemDeMaquina/Unidade 1/emails/Spam/'
+caminhoNSPAM = '/home/victor/Área de Trabalho/DCA0133-AprendizagemDeMaquina/Unidade 1/emails/NaoSpam/'
+
+listSPAM = []
+listNSPAM = []
+
+for i in range(1, 24, 1):
+    arq = open(caminhoSPAM+str(i)+'.txt', 'r')
+    listSPAM.append(arq.read() + ' ')
+    arq.close()
+
+for i in range(1, 27, 1):
+    arq = open(caminhoNSPAM+str(i)+'.txt', 'r')
+    listNSPAM.append(arq.read() + ' ')
+    arq.close()
 
 dicSPAM = contagem()   # Criação dos dicionários
 dicNSPAM = contagem()  # Serão lidos arquivos de texto com o conteúdo de emails
