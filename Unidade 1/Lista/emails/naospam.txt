@@ -1,0 +1,480 @@
+﻿
+
+Boa tarde,
+sou seu aluno da turma de Eletricidade Aplicada e gostaria de participar do curso de Lógica Fuzzy divulgado pelo senhor nas aulas.
+Porém não estou encontrando o evento para fazer inscrição via SIGAA.
+Gostaria que o senhor me informasse o local e a hora do curso.
+
+Boa tarde,
+Sou aluno da sua turma de Arquitetura de Computadores do 46M12 e tenho um dúvida.
+Recentemente escrevi alguns códigos Assembly para MIPS e tentei executá-los, mas toda vez que tento abrir os arquivos .asm no QtSpim ele para de responder logo em seguida.
+Nem eu nem meus amigos sabem o porquê desse comportamento. O senhor poderia dar um olhada em algum deles para identificar o problema?
+
+Prezados,
+o prazo é dia 20. Confirmado. Enviem-me antes os relatórios...
+se puderem me enviem antes o formato do relatório de vcs.
+
+
+Enviem também os tutoriais preparados.. desde o início do ano.
+
+Lembrem-se: tivemos encontros este ano. Vcs preparam tutoriais.
+Vcs preparam e aplicaram a resolução de um exercício em sala.
+Vcs leram um material que enviei no início das atividades.
+
+Estou enviando em anexo o formulário que o SIGAA disponibiliza para respondermos. 
+O tutorial com o assunto da 1ª unidade está sendo finalizado, o da 2ª unidade está com Emerson e o da 3ª faremos juntos e já começamos. 
+Continuarei a preencherei o formulário agora e enviaremos os todos tutoriais em breve.
+
+Eu tenho uma bolsa de IC até julho, vc tem interesse?
+Se sim, procure no sigaa, faça seu currículo lattes e cadastre interesse.
+Ela está como voluntária... mas é remunerada.
+
+Bom dia,
+sou aluno da subturma 1B de circuitos digitais e gostaria de saber os horários disponíveis para apresentação do processador nesta segunda feira.
+
+Fotos Reveillon Esse dia foi louco
+
+Bom dia, 
+Sou aluno da turma de laboratório de circuitos digitais. Gostaria que o senhor disponibilizasse o esquema da calculadora apresentado na última sexta.
+
+Bom dia,
+
+as imagens estão em formato eps e svg. Se não conseguir visualizar me avise.
+
+Falei com Darlan e ele concordou em transferir meu horário da quarta pro M56.
+
+Boa noite, meu colega Yawo, por engano, colocou meu nome no relatório dele. Peço que considere apenas esse que envio. 
+Em breve mandarei e-mail agendando a apresentação.
+
+
+Boa noite, meu colega Yawo, por engano, colocou meu nome no relatório dele. Peço que considere apenas esse que envio. 
+Em breve mandarei e-mail agendando a apresentação.
+
+
+Olá, sou da turma 01 de Circuitos Digitais e estou disponível nos horários:
+quarta 11 às 9:40
+quarta 11 às 14:40
+sexta 13 às 8:00
+
+Victor Emanuel Ribeiro Silva
+Matrícula: 2015011130
+
+Boa tarde, colegas.
+
+
+Encaminho em anexo o guia para elaboração de Trabalho de Conclusão de Curso (TCC).
+
+O guia foi desenvolvido por bibliotecários do IFRN e segue as orientações da ABNT. 
+
+
+Aproveito para informar que este documento, além de outras informações sobre a biblioteca podem ver acessadas pela página do campus.
+
+http://portal.ifrn.edu.br/campus/natalzonanorte/biblioteca-3​
+
+
+Abraço.
+
+Prezado,
+estou enviando a primeira versão do tutorial de integral que produzi. Ainda pretendo fazer mais, pois acho que há poucas questões contextualizadas.
+O tutorial foi criado para ser direcionado a alguém que estudou integral mas não se lembra do conteúdo.
+Porém, conversando com o estudante indicado, ele me disse que não estudou integral no curso de cálculo I. Por isso optamos por resolver questões do Stewart Vol. 1.
+
+
+
+Bom dia,
+
+Você está recebendo este e-mail pois manifestou interesse em conhecer nosso programa de estágio.
+
+ 
+
+Pedimos que por favor, acesse http://bit.ly/estagiodoutorpc para conhecer mais sobre o programa e nos enviar o restante da documentação.
+
+ 
+
+A Doutor Pc é uma empresa fundada em Natal/RN com mais de uma década de vida. Somos uma empresa especializada em serviços de Help/Service Desk, em infraestrutura, em assistência técnica e desenvolvimentos de novas tecnologias e processos.
+
+ 
+
+Em nosso programa de estágio de 01 ano, buscamos capacitar o aluno em todas as nossas áreas. Elaboramos um programa de treinamento gradual que visa ampliar e aperfeiçoar os conhecimentos formais adquiridos na instituição de ensino. Acreditamos que após o estágio, o aluno estará bem mais preparado para assumir seu lugar no mercado de trabalho.
+
+Quem sabe ser efetivado na Doutor Pc não é mesmo?
+
+Olá alunas e alunos de Arquitetura de Computadores
+
+Vocês estão recebendo esse email porque cursaram a turma de Circuitos Digitais, de eng. de computação, em 2017.2 e porque fizeram um trabalho de simulação de um processador na época.
+
+Este trabalho feito por vocês está bem contextualizado com o assunto da segunda unidade de Arquitetura de Computadores. Portanto, não vejo necessidade de pedir o desenvolvimento de algo que já foi feito. Sei que este trabalho foi feito em grupo e a proposta para nossa disciplina é que estes grupos se mantivessem.
+
+Gostaria que preparassem um relatório explicativo sobre o desenvolvimento do seu trabalho em Circuitos Digitais, principalmente em relação à definição dos módulos e demais elementos que compuseram o processador na solução proposta. Entre outras coisas, o relatório deve conter:
+
+1) Apresentação do problema tratado
+2) Explicação funcional (modular) da solução proposta
+3) Modo de implementação da simulação
+4) Resultados obtidos com a simulação
+
+Este relatório é em grupo. Vocês têm entre 18/06 e 29/06 para entregá-lo via email, formato PDF (diogo@dca.ufrn.br).
+
+Considerem que este email é a chamada oficial do trabalho da segunda unidade.
+
+Alguma dúvida específica, podem mandar email ou então poderemos discutir na próxima semana.
+
+A apresentação das primeiras notas deverá ser feita antes do dia 18/06.
+
+Nesta sexta-feira temos aula normal, com a finalização do assunto de pipeline em processadores MIPS.
+
+Atenciosamente,
+
+Olá Vitor,
+Nova notícia na(s) turma(s) DCA0130 - REDES DE COMPUTADORES (60h) - Turma: 01 (2018.2)
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+sex 31/08, 17:22
+Você
+Uma notícia foi cadastrada na turma virtual: DCA0130 - REDES DE COMPUTADORES (60h) - Turma: 01 (2018.2)
+Enquete
+
+Turma, termina hoje o prazo para votar na enquete sobre o adiamento ou não da avaliação 1. Quem ainda não votou, vote!
+A Operadora Nacional do Sistema (ONS) é responsável pela coordenação e controle da operação das instalações de geração e transmissão de energia elétrica do Sistema Interligado Nacional (SIN), sob a fiscalização e regulação da Agência Nacional de Energia Elétrica (Aneel) .
+
+Essa visita técnica é uma iniciativa do Ramo do IEEE juntamente com os laboratórios Leier e ProRedes. Como o número de lugares é limitado, apenas os alunos que tiveram melhor rendimento na disciplina de EA foram indicados para irem a essa visita.
+
+A concentração para sair da UFRN será às 5h30min aqui na ECT, com previsão de chegada na ONS às 9h30min. O retorno está previsto para às 19h, saindo de Recife as 14h.
+
+Por favor me retone, até o final do dia, confirmando se você realmente tem disponibilidade e interesse em ir.
+
+
+Não sei se já mandei o livro de Sinais então tô mandando aqui junto com o trabalho de Arquitetura
+
+Prezado usuário,
+
+Informamos que novos arquivos foram adicionados na turma virtual
+
+O Núcleo de Línguas, NucLi-UFRN/IsF, divulga a oferta de turmas presenciais de INGLÊS com início das aulas em 17 de setembro. As inscrições poderão ser efetuadas até 04/9 através do link isfaluno.mec.gov.br.
+
+Mais informações: Núcleo de Línguas/IsF Instituto Ágora , sala 27, Tel.: (84) 3342-2244 ou (84) 9 9480-6848 E-mail: isf.ufrn@gmail.com
+
+-----------------------
+e-Comunicação UFRN: este sistema permite a comunicação entre a UFRN e sua comunidade universitária, divulgando as notícias e comunicados da instituição.
+Att,
+
+
+Nova notícia na(s) turma(s) DCA0133 - APRENDIZAGEM DE MÁQUINA E MINERAÇÃO DE DADOS (60h) - Turma: 01 (2018.2)
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+qui 30/08, 10:15
+Você
+Uma notícia foi cadastrada na turma virtual: DCA0133 - APRENDIZAGEM DE MÁQUINA E MINERAÇÃO DE DADOS (60h) - Turma: 01 (2018.2)
+Cancelamento da Aula
+
+Caros alunos devido a um compromisso do IMD terei que cancelar a aula de hoje.
+
+Nova Tarefa Cadastrada: DCA0124 - AUTOMAÇÃO INDUSTRIAL (60h) - Turma: 01 (2018.2)
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+qui 30/08, 00:18
+Você
+Prezado usuário,
+
+Informamos que uma nova tarefa foi adicionada na turma DCA0124 - AUTOMAÇÃO INDUSTRIAL (60h) - Turma: 01 (2018.2)
+
+Informação da tarefa:
+
+Título: Segundo Trabalho
+
+Para visualizar acesse a turma virtual no SIGAA.
+
+ESTE E-MAIL FOI GERADO AUTOMATICAMENTE PELO SISTEMA SIGAA.POR FAVOR, NÃO RESPONDÊ-LO.
+
+Nova Enquete adicionado(a): DCA0130 - REDES DE COMPUTADORES (60h) - Turma: 01 (2018.2)
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+qua 29/08, 15:53
+Você
+Prezado usuário,
+
+Informamos que uma nova Enquete foi adicionada na turma: DCA0130 - REDES DE COMPUTADORES (60h) - Turma: 01 (2018.2)
+
+Informações da Enquete:
+
+Título: Data da Avaliação 1
+
+Para visualizar a Enquete acesse a turma virtual no SIGAA.
+
+ESTE E-MAIL FOI GERADO AUTOMATICAMENTE PELO SISTEMA SIGAA. POR FAVOR, NÃO RESPONDÊ-LO.
+
+Nova notícia na(s) turma(s) MEC1614 - INTRODUÇÃO AOS SISTEMAS DE MANUFATURA (60h) - Turma: 01 (2018.2)
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+ter 28/08, 23:33
+Você
+Uma notícia foi cadastrada na turma virtual: MEC1614 - INTRODUÇÃO AOS SISTEMAS DE MANUFATURA (60h) - Turma: 01 (2018.2)
+Local da aula do dia 29/08
+
+Saudações caros alunos,
+
+Peço desculpas por avisar tão tarde, porem gostaria de informar que a aula de amanhã (29/08) será realizada no Laboratório de Metrologia.
+Nova notícia na(s) turma(s) DCA0121 - INTELIGENCIA ARTIFICIAL APLICADA (60h) - Turma: 01 (2018.2)
+SIGAA - Turma Virtual
+seg 27/08, 19:42
+Você
+Uma notícia foi cadastrada na turma virtual: DCA0121 - INTELIGENCIA ARTIFICIAL APLICADA (60h) - Turma: 01 (2018.2)
+Ordem e Local da apresentação
+
+Boa tarde, caros alunos,
+
+A ordem de apresentação foi a seguinte:
+
+Terça (28/08):
+
+Grupo 6
+Grupo 4
+Grupo 9
+Grupo 2
+Grupo 7
+Grupo 11
+Grupo 5
+Quinta (30/08):
+Grupo 14
+Grupo 10
+Grupo 13
+Grupo 8
+Grupo 3
+Grupo 12
+Grupo 1
+Pontos avaliados: Problema, Descrição da proposta e Apresentação.
+As apresentações serão realizadas no auditório do nPITI. 
+
+Att, 
+
+Prof. Sérgio
+
+Nova notícia cadastrada para turma virtual: MEC1614 - INTRODUÇÃO AOS SISTEMAS DE MANUFATURA (60h) - Turma: 01 (2018.2)
+SIGAA - Turma Virtual
+dom 26/08, 22:23
+Você
+Uma notícia foi cadastrada na turma virtual: MEC1614 - INTRODUÇÃO AOS SISTEMAS DE MANUFATURA (60h) - Turma: 01 (2018.2)
+Local da realização da 1ª Avaliação
+
+Saudações caros alunos, Em função de alguns problemas de logística, a 1ª avaliação será realizada no Laboratório de Metrologia.
+Funcionamento da Biblioteca Setorial da Escola de Saúde
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+sex 24/08, 20:55
+Você
+Baixar  Salvar no OneDrive - Pessoal
+Srs. usuários,
+
+
+
+Informamos que a Biblioteca Setorial da Escola de Saúde da UFRN se manterá fechada ao público, entre os dias 27 e 29 de agosto de 2018, para manutenção da segurança magnética do acervo.
+
+As devoluções de livros previstas para essas datas foram alteradas para quinta-feira (30/08/2018), sem prejuízos para os usuários.
+
+
+
+Atenciosamente,
+
+Magnólia Andrade
+
+Diretora da BCZM e SISBI/UFRN
+
+
+-----------------------
+e-Comunicação UFRN: este sistema permite a comunicação entre a UFRN e sua comunidade universitária, divulgando as notícias e comunicados da instituição.
+
+Caso não queira receber mais estas notificações clique aqui.
+Atualização do Módulo Biblioteca do SIGAA Mobile
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+sex 24/08, 13:17
+Você
+Srs. usuários,
+
+ 
+
+Tivemos algumas atualizações internas do Módulo Biblioteca do SIGAA Mobile (Apple), assim, solicitamos a atualização de sua versão para evitarmos inconsistências no sistema, principalmente com as datas de devoluções dos empréstimos ativos.
+
+ 
+
+Atenciosamente,
+Magnólia Andrade
+Diretora da BCZM e SISBI/UFRN
+
+
+-----------------------
+e-Comunicação UFRN: este sistema permite a comunicação entre a UFRN e sua comunidade universitária, divulgando as notícias e comunicados da instituição.
+
+Caso não queira receber mais estas notificações clique aqui.
+Atualização do Módulo Biblioteca do SIGAA Mobile
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+sex 24/08, 13:17
+Você
+Srs. usuários,
+
+ 
+
+Tivemos algumas atualizações internas do Módulo Biblioteca do SIGAA Mobile (Apple), assim, solicitamos a atualização de sua versão para evitarmos inconsistências no sistema, principalmente com as datas de devoluções dos empréstimos ativos.
+
+ 
+
+Atenciosamente,
+Magnólia Andrade
+Diretora da BCZM e SISBI/UFRN
+
+
+-----------------------
+e-Comunicação UFRN: este sistema permite a comunicação entre a UFRN e sua comunidade universitária, divulgando as notícias e comunicados da instituição.
+
+Caso não queira receber mais estas notificações clique aqui.
+
+Novo arquivo inserido na turma virtual: DCA0133 - APRENDIZAGEM DE MÁQUINA E MINERAÇÃO DE DADOS (60h) - Turma: 01 (2018.2)
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+qui 23/08, 20:04
+Você
+Prezado usuário,
+
+Informamos que um novo arquivo foi adicionado na turma virtual: DCA0133 - APRENDIZAGEM DE MÁQUINA E MINERAÇÃO DE DADOS (60h) - Turma: 01 (2018.2)
+
+Informações do arquivo:
+
+Título: lista1_18.2.pdf
+Nome: Lista 1
+Descrição: Primeira Lista de Exercícios
+Tópico de Aula: 31/07/2018 - Introdução ao Curso
+Para efetuar o download do arquivo acesse a Turma Virtual no SIGAA.
+
+ESTE E-MAIL FOI GERADO AUTOMATICAMENTE PELO SISTEMA SIGAA.POR FAVOR, NÃO RESPONDÊ-LO.
+Novos arquivos inseridos na turma virtual: DCA0133 - APRENDIZAGEM DE MÁQUINA E MINERAÇÃO DE DADOS (60h) - Turma: 01 (2018.2)
+Sistemas SINFO/UFRN <mensageiro@sistemas.ufrn.br>
+qui 23/08, 20:03
+Você
+Prezado usuário,
+
+Informamos que novos arquivos foram adicionados na turma virtual: DCA0133 - APRENDIZAGEM DE MÁQUINA E MINERAÇÃO DE DADOS (60h) - Turma: 01 (2018.2)
+
+Informações dos arquivos:
+
+Título: Apresentacao Adriao.pptx
+Nome: Material das aulas
+Tópico de Aula: 31/07/2018 - Introdução ao Curso
+Título: Aula_1.ppt
+Nome: Aula_1.ppt
+Tópico de Aula: 31/07/2018 - Introdução ao Curso
+Título: Aula_1_Revisão_Probabilidades.ppt
+Nome: Aula_1_Revisão_Probabilidades.ppt
+Tópico de Aula: 31/07/2018 - Introdução ao Curso
+Título: Aula_2.ppt
+Nome: Aula_2.ppt
+Tópico de Aula: 31/07/2018 - Introdução ao Curso
+Título: Aula_2_Revisão_Probabilidades.ppt
+Nome: Aula_2_Revisão_Probabilidades.ppt
+Tópico de Aula: 31/07/2018 - Introdução ao Curso
+Título: Aula_3.ppt
+Nome: Aula_3.ppt
+Tópico de Aula: 31/07/2018 - Introdução ao Curso
+Título: Aula_3_revisão_probabilidades.ppt
+Nome: Aula_3_revisão_probabilidades.ppt
+Tópico de Aula: 31/07/2018 - Introdução ao Curso
+Título: ProcessosEstocasticosSimulacao Versao 2003.ppt
+Nome: ProcessosEstocasticosSimulacao Versao 2003.ppt
+Tópico de Aula: 31/07/2018 - Introdução ao Curso
+Para efetuar o download do arquivo acesse a Turma Virtual no SIGAA.
+
+ESTE E-MAIL FOI GERADO AUTOMATICAMENTE PELO SISTEMA SIGAA.POR FAVOR, NÃO RESPONDÊ-LO.
+ELE1524 - Dúvida sobre o trabalho do terceira unidade
+Guillherme Amaral
+rlucio@ct.ufrn.br
+Baixar  Salvar no OneDrive - Pessoal
+Olá, Professor Ricardo,
+
+
+O tipo de máquina elétrica escolhido pelo meu grupo foi motor de passo e gostaria de saber se na apresentação é necessário explicar detalhes sobre o funcionamento interno do mesmo, uma vez que no artigo escolhido (segue em anexo) e em vários outros pesquisados, apenas a parte do controle e aplicações eram abordadas.
+
+
+Podemos utilizar outros artigos de forma complementar? Como por exemplo citar outras aplicações de motor de passo que não estejam no "artigo principal" ou caso seja necessário dar mais detalhes sobre o motor colocar informações sobre a modelagem do mesmo (encontramos alguns artigos com essas informações).
+
+
+Grato,
+
+Tharcito Souza Pereira <tharcitoengcomp@gmail.com>
+sex 30/03, 19:45
+Você
+Boa tarque Guilherme, no arquivo q vc me enviou com as plantas e as fotos dos resultados. Veio faltando a planta do controlador PD e a planta com PD com os filtros. Poder mandar fico agradeciado. 
+
+Att
+Tharcito de Souza
+Guillherme Amaral.
+Trabalho para reposição de aula - Ganchos para cabos de aço
+eclaudio@ufrnet.br
+Olá, Professor,
+DCA0206 - Sistemas de Controle - Reenvio do relatório da terceira experiência
+Guillherme Amaral
+emanoel.chaves@dca.ufrn.br
+Baixar  Salvar no OneDrive - Pessoal
+Reenvio do relatório do terceiro laboratório como pedido.
+
+Grato,
+
+
+Guillherme Amaral.
+
+Como estarei participando da SECEM eu não poderei ir à aula, portanto estou enviando a atividade por email.
+
+Grato, 
+Laboratório de Controle
+Guillherme Amaral
+meneghet@dca.ufrn.br
+Baixar  Salvar no OneDrive - Pessoal
+Olá, Professor,
+
+Queria saber se o senhor tem alguma novidade sobre os planos de trabalho. Fui na sua sala hoje às 10h35 e não lhe encontrei, sendo assim segue em anexo os meus horários de aula para que o senhor escolha um horário conveniente.
+
+Grato,
+
+Guillherme Amaral
+
+Comprovante de pagamento - Formatura BCT UFRN
+ 1 
+Laurel Formaturas <laurelformaturas@gmail.com>
+qua 25/10/2017, 17:36
+Você
+Boa tarde!
+Relatório da FEBRACE - FINAL
+ 5 
+Pedro Ivo de Araujo do Nascimento <pedro.nascimento@ifrn.edu.br>
+dom 03/11/2013, 20:14
+Você
+preciso das datas de nascimento dos três integrantes do projeto para fazer a inscrição
+
+Pedro Ivo Nascimento
+Prof. Eletrônica
+IFRN - Campus Natal Zona Norte
+pedro.nascimento@ifrn.edu.br
+
+Faremos a correção para o próximo boleto. Agradecemos a compreensão! 
+
+Att.,
+Laurel Formaturas
+ECT2302 - MCT - Ativdade em
+Pedro Ivo de Araujo do Nascimento <pedro.nascimento@ifrn.edu.br>
+sex 22/11/2013, 03:53
+Você
+Guilherme fiz poucas modificações e peço que nos resultados e discussões escrevam um pouco mais, inclusive sobre o fato dos receptores serem ruins e tal. Além disso coloquem uma figura da ultima interface gráfica.
+ALém disso no espaço qeu tem destinado a colocar o simbolo da instituição, coloque o simbolo do campus natal zona norte(disponível no site) e também o simbolo da petrobras.
+Depois disso pode ir lá em neyrivan direto, me envie só para eu guardar.
+Att
+
+Pedro Ivo Nascimento
+Prof. Eletrônica
+IFRN - Campus Natal Zona Norte
+pedro.nascimento@ifrn.edu.br Grupo
+Brunielle Nathaly <bruniellenathaly@hotmail.com>
+sáb 05/03/2016, 22:40
+TCC
+Marcus Vinicius Araujo Fernandes
+seg 28/12/2015, 13:20
+Você
+Oi Guilherme,
+O prazo para dar entrada é fevereiro.
+Atenciosamente,
+Marcus Fernandes
+
+Você
+Olá  Guilherme. Tudo bom? Eu não sou mais aluna da ect. Eu já  fiz minha matrícula em engenharia elétrica  e vou começar  o curso agora em 2016.2. Infelizmente o SIGAA ainda não cancelou minha matrícula de cet. Então  eu não participarei dessa atividade.
+Enviado do Outlook Mobile
+
+
+Guillherme Amaral.
