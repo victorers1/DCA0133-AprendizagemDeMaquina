@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
 # Inspiração: https://monkeylearn.com/blog/practical-explanation-naive-bayes-classifier/
-# Código desenvolvido para Python versão 2.7, versões futuras podem não funcionar
+# Código desenvolvido para Python versão 2.7, versões posteriores podem não funcionar
 # CLASSIFICADOR DE SPAM PELO MÉTODO DE NAIVE-BAYES
 
 from __future__ import division
 import string
 
 
-# Palavras e caracteres a serem removidas das manchetes
-palRemov = ['sem', 'só', 'à', 'os', 'aos', 'com', 'como', 'Há', 'há', 'para', 'tem', 'têm', 'uma', 'uns', 'um', 'umas',
-            'por', 'das', 'as', 'é', 'É', 'se', 'dos', 'desse', 'deste', 'dessa', 'desta', 'desses', 'destes', 'dessas',
-            'destas', 'essas', 'essa', 'esse', 'esses', 'Em', 'ao', 'do', 'da', 'de', 'que', 'na', 'no', 'até', 'após',
-            'são', 'mas', 'mais', 'menos', 'tem', 'pouco', 'nas', 'nos', 'em', 'pela', 'pelo', 'pelas', 'pelos', 'ou',
+# Palavras e caracteres a serem removidas do email
+palRemov = ['sem', 'só', 'à', 'os', 'aos', 'com', 'como', 'há', 'para', 'tem', 'têm', 'uma', 'uns', 'um', 'umas',
+            'por', 'das', 'as', 'é', 'se', 'dos', 'desse', 'deste', 'dessa', 'desta', 'desses', 'destes', 'dessas',
+            'destas', 'essas', 'essa', 'esse', 'esses', 'em', 'ao', 'do', 'da', 'de', 'que', 'na', 'no', 'até', 'após',
+            'são', 'mas', 'mais', 'menos', 'tem', 'pouco', 'nas', 'nos', 'pela', 'pelo', 'pelas', 'pelos', 'ou',
             'por']
 for letra in string.ascii_letters:
     palRemov.append(letra)  # Adiciona todas as letras do alfabeto à 'palRemov'
@@ -62,8 +62,8 @@ def contagem(end_arq):  # Recebe o endereço de um arquivo txt e cria um dicion�
     return dicio  # Retorna o dicionário com todas as frequências de ocorrência incrementadas em uma unidade 1 da real
 
 
-dicSPAM = contagem('C:/Users/victo/OneDrive/UFRN/Apredizagem de Maquina/Unidade 1/Lista/emails/spam.txt')  # Criação dos dicionários
-dicNSPAM = contagem('C:/Users/victo/OneDrive/UFRN/Apredizagem de Maquina/Unidade 1/Lista/emails/naospam.txt')  # Serão lidos arquivos de texto com o conteúdo de emails
+dicSPAM = contagem('/home/victor/Área de Trabalho/DCA0133-AprendizagemDeMaquina/Unidade 1/Lista/emails/spam.txt')  # Criação dos dicionários
+dicNSPAM = contagem('/home/victor/Área de Trabalho/DCA0133-AprendizagemDeMaquina/Unidade 1/Lista/emails/naospam.txt')  # Serão lidos arquivos de texto com o conteúdo de emails
 
 
 while True:
@@ -74,7 +74,7 @@ while True:
     probNSPAM = naive_bayes(dicNSPAM, email)  # Calcula probabilidade de ser NÃO ser SPAM
     # A soma das probabilidades não precisa ser igual a 1
 
-    print('prob. spam: '     + str(probSPAM))  #
+    print('prob. spam: ' + str(probSPAM))  #
     print('prob. não spam: ' + str(probNSPAM))  # Os valores geralmente são bem pequenos
 
     dicConclusao = {probSPAM: 'SPAM', probNSPAM: 'NÃO SPAM'}
