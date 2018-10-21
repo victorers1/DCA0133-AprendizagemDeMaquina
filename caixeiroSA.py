@@ -34,7 +34,6 @@ def caminhoAdjacente(grafo, caminho):
     pos1 = 0
     pos2 = 0
     adj = caminho.copy()
-    
     caminhoVal = False
     while(not caminhoVal or adj==caminho):  
         while(pos1==pos2):
@@ -49,24 +48,29 @@ def custo(grafo, caminho):
     soma = 0
     for i in range(len(caminho)-1):
         soma += grafo[caminho[i]][caminho[i+1]]['weight']
-    
     return soma
+
 
 def SA(grafo, cidades, T):
     '''Implementa Simulated Anneling'''
     xAtual = geraCaminho(grafo, cidades)  # Gera primeiro caminho aleatório
-    yAtual = custo(grafo, xAtual)  # E seu curto
+    yAtual = custo(grafo, xAtual)  # E seu custo
     hist_X = [xAtual]  # Histórico de
     hist_Y = [yAtual]  # soluções
-    for i in range(1000):
+    for i in range(50000):
         xProx = caminhoAdjacente(grafo, xAtual)  # Gera os novos dados para
         yProx = custo(grafo, xProx)              # comparar com o atual
+        print('i: '+str(i)+', yA: '+str(yAtual)+', yP: '+str(yProx)+', T: '+str(T))
         if np.random.rand() > 1 - np.e**-((yAtual-yProx)/T):  # Caso verdade, NÃO aceito novo valor
             xProx = xAtual.copy()  # Valor de xProx é descartado
         
         xAtual = xProx.copy()         # Atualiza valores de x e y
         yAtual = custo(grafo, xAtual) #
-        T = 0.99 * T #Reduz a temperatura por 1% a cada iteração
+        
+        if  i%2000:
+            T = 0.99*T
+        if T<0.5:  # Para o loop quando T fica bem pequeno
+            break;
         hist_X.append(xAtual)  # Adiciona no fim da lista o valor de xAtual (que também é uma lista)
         hist_Y.append(yAtual)
         
@@ -80,7 +84,7 @@ def SA(grafo, cidades, T):
 #Consultar documentação completa do draw(): nx.draw_networkx()
 
 cidades = []
-qtd_cidade = 10
+qtd_cidade = 7
 for i in range(1, qtd_cidade+1):
     cidades.append(i)
 
@@ -91,6 +95,7 @@ for i in range(1, qtd_cidade+1):
         if i > j:  # Pra não percorrer a mesma aresta duas vezes
             Mapa.add_edge(i,j, weight=random.randint(0, 50))
 
+
 print('Gerando grafo aleatório')
 plt.figure(1)
 nx.draw_circular(Mapa,with_labels=True,font_weight='bold')
@@ -100,7 +105,7 @@ plt.show()
 print('Executando SA várias vezes')
 resultados = []
 for i in range(50):
-    x,c,hx,hy = SA(Mapa, cidades, 6440)
+    x,c,hx,hy = SA(Mapa, cidades,19999)
     resultados.append(c)
 
 plt.figure(2)
