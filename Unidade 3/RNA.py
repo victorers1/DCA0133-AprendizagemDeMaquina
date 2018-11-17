@@ -80,7 +80,7 @@ class RedeNeural(object):
         a partir dos erros na saída da mesma. Aqui, só são calculados os gradientes 
         (deltas) de cada neurônio. Os pesos são efetivamente atualizados noutra função.'''
         zmemo = [np.array(entrada)]  # Matriz memória1. Guardaremos todas as saídas dos neurônios antes de passar para a função de ativação
-        ativ = [np.array(entrada)]  # Matriz memória2. Guardaremos todas as saídas dos neurônios depois de passar para a função de ativação. Inclui a camada de entrada.
+        amemo = [np.array(entrada)]  # Matriz memória2. Guardaremos todas as saídas dos neurônios depois de passar para a função de ativação. Inclui a camada de entrada.
         
         #PASSADA DIRETA SALVANDO VALORES
         for v,p in zip(self.vieses, self.pesos):
@@ -90,63 +90,80 @@ class RedeNeural(object):
                 prox_entrada.append(z[0])  # 'z' é uma lista de um valor
             zmemo.append(np.array(prox_entrada))  # guarda valor antes de passá-la para função de ativ.
             entrada = ativacao(prox_entrada) # att. entrada
-            ativ.append(np.array(entrada))  # guarda valores depois da ativação, não sei se será necessário ainda
+            amemo.append(np.array(entrada))  # guarda valores depois da ativação, não sei se será necessário ainda
         
         #converte tudo em np.array para usufruirmos de suas funções
         zmemo = np.array(zmemo)
         entrada = np.array(entrada)
-        ativ = np.array(ativ)
-        #print('ativ=\n{0}'.format(ativ))
+        amemo = np.array(amemo)
+        #print('ativ=\n{0}'.format(amemo))
         
-        #PASSADA INVERSA REPASSANDO ERRO
-        grad_p = [np.zeros(p.shape) for p in zmemo]
+        #PASSADA INVERSA, RETROPROPAGAÇÃO DO ERRO
+        grad_p = [np.zeros(p.shape) for p in self.pesos]
         grad_v = [np.zeros(v.shape) for v in self.vieses]
-        delta = grad_p.copy()
+        print('grad_v inicial= {}\n'.format(grad_v))
+        #delta da camada de saída é calculado diferentemente dos outros
+        delta = self.dcusto(gabarito, amemo[-1])*dativacao(zmemo[-1])  #conteúdo de 'amemo[-1]' é igual o de 'entrada'
+        grad_v[-1] = delta.transpose()
+        for i in range(len(grad_p[-1][0])):  # Pega primeiro elemento dos pesos da última camada
+            grad_p[-1][:,i] = (delta*amemo[-1]) # ou np.transpose()
         
-        delta[-1] = self.dcusto(gabarito, entrada)
-        grad_p[-1] = delta[-1]*dativacao(zmemo[-1])*ativ[-1]  # delta de cada neurônio na saída
-        grad_v[-1] = delta[-1]*ativ[-1] # delta da última camada de neurônios
-        for l in range(2, self.num_camadas+1):  #-l é a camada que está sendo analizada
-            z = zmemo[-l]  # Recupero os valores da camada em análize
-            p = self.pesos[-l+1]  # Recupero pesos desta iteração
-            for i in range(len(p[0])):  # cada iteração atualiza um neurônio da camada l
-                delta[-l][i] = np.dot(p[:,i], grad_p[-l+1])*dativacao(z[i])
+        for l in range(2, self.num_camadas):  #-l é a camada que está sendo analizada
+            z = zmemo[-l]  # Valores da camada em análize antes da ativação
+            a = amemo[-l]  # As ativações da camada em análise
+            p = self.pesos[-l+1]  # Recupero pesos da camada seguinte
+            #print('z= {}; a= {}; p= {}'.format(z,a,p))
+            # OBS: gradiente da camada seguinte já está salvo em 'delta'
+            prox_delta = []  # lista com os próximos valores de delta
+            for i in range(len(p[0])):  # cada iteração calcula o delta de um neurônio da camada l
+                #print('appending to prox_delta=\n{}'.format(np.dot(p[:,i], delta)*dativacao(z[i])))
+                prox_delta.append(np.dot(p[:,i], delta)*dativacao(z[i]))
+                prox_delta = np.array(prox_delta).transpose()
+            
+            delta = np.array(prox_delta.copy())
+            grad_v[-l] = delta.transpose()
+            #print('grad_v[-{}]= {}\n'.format(l, grad_v[-l]))
+            for i in range(len(grad_p[-l][0])):
+                grad_p[-l][:,i] = (delta*a)
+                
+        #print('grad_p final=\n{}'.format(grad_p))
+        for v in grad_v:
+            v = v.transpose()
+        print('grad_v final=\n{}'.format(grad_v))
+        return np.array(grad_p), np.array(grad_v)
 
-        for i in range(2, len(self.vieses)+1): # salva gradiente dos vieses fora da camada de saída
-            grad_v[-i] = delta[-i]*ativ[-i]
 
-        for i in range(len(delta)-1):  # preenche gradiente dos pesos da camada 1 até a penúltima
-            for j in range(len(delta[i])):
-                grad_p[i][j] = delta[i][j]*ativ[i][j]
-        
-        return grad_p, grad_v
-    
-    
     def atualiza_lote(self, mini_lote, lr):
         '''Atualiza pesos e vieses da rede com base no gradiente calculado pela
         função backpropagation(). Não há valor de retorno, tudo é modificado 
         diretamente nas variáveis internas da classe.
-        mini_lote: lista de tuplas contendo o par (amostra, gabarito). Ambas 
-        coordenadas devem ser estruturas compatíveis com a rede pois não haverá
-        verificações nem tratamento de erros.
+        mini_lote: tuplas contendo o par (amostra, gabarito). Ambas coordenadas
+        devem ser estruturas compatíveis com a rede pois não haverá verificação
+        nem tratamento de erros.
         lr: taxa de aprendizagem. geralmente um valor no intervalo (0,1)
         '''
-        grad_p_acum = [np.zeros(p.shape) for p in self.pesos]  # acumulado dos gradientes de várias iterações do bakcpropagation
-        grad_v_acum = [np.zeros(v.shape) for v in self.vieses]
+        grad_p_acum = np.array([np.zeros(p.shape) for p in self.pesos])  # acumulado dos gradientes de várias iterações do bakcpropagation
+        grad_v_acum = np.array([np.zeros(v.shape) for v in self.vieses])
+        #print('grad_v_acum inicial=\n{}'.format(grad_v_acum))
         # acumulado dos gradientes de várias iterações do backpropagation
         for x,y in zip(mini_lote[0], mini_lote[1]):
             grad_p, grad_v = self.backpropagation(x,y)
-            #print('grad_p=\n{0}'.format(grad_p))
-            grad_p_acum = [ngp+gp for ngp,gp in zip(grad_p, grad_p_acum)]  # Realiza soma elemento a elemento entre duas lista de mesmo formado
-            grad_v_acum = [ngv+gv for ngv,gv in zip(grad_v, grad_v_acum)]
-            print('grad_v_acum=\n{}'.format(grad_v_acum))
-        self.pesos = [peso-lr*grad for peso, grad in zip(self.pesos, grad_p_acum)]
-        self.vieses = [vies-lr*grad for vies, grad in zip(self.vieses, grad_v_acum)]
+            print('grad_v_acum=\n{0}'.format(grad_v_acum))
+            #print('grad_v=\n{0}'.format(grad_v))
+            grad_p_acum = [gp+gpa for gp,gpa in zip(grad_p, grad_p_acum)]  # Realiza soma elemento a elemento entre duas lista de mesmo formado
+            grad_v_acum = [gv+gva for gv,gva in zip(grad_v, grad_v_acum)]
+            
+        
+        #print('antg pesos=\n{}'.format(self.pesos))
+        #print('antg viese=\n{}'.format(self.vieses))
+        
+        self.pesos = [peso-lr*gradp for peso,gradp in zip(self.pesos, grad_p_acum)]
+        #self.vieses = [vies-lr*gradv for vies,gradv in zip(self.vieses, grad_v_acum)]
         #print('novo pesos=\n{}'.format(self.pesos))
-        #print('novo viese=\n{}'.format(self.vieses))
+        #print('novo vieses=\n{}'.format(self.vieses))
 
 #GERANDO DADOS
-theta=np.linspace(0, 20, 5)
+theta=np.linspace(0, 20, 2)
 x1 = theta/4*np.cos(theta)
 y1 = theta/4*(np.sin(theta))
 x2 = (theta/4+.8)*np.cos(theta)
@@ -164,11 +181,10 @@ y_treino = np.array(y_treino)
 rn = RedeNeural([2,3,2])
 saida = rn.adiante(x_treino[1]); print('saida=\n{0}'.format(saida))
 
-#g_pesos, g_vieses = rn.backpropagation(x_treino[0], y_treino[0])
-
 rn.atualiza_lote((x_treino,y_treino), 0.1)
 
 saida = rn.adiante(x_treino[1]); print('saida=\n{0}'.format(saida))
+
 
 
 '''DEPÓSITO DE CÓDIGO
@@ -183,4 +199,16 @@ uniao = (foo,bar)
 for (f, b) in zip(uniao[0], uniao[1]):
     print("f: "+str(f) + "; b: " + str(b))
 
+a = np.array([[1,2],[2,2],[3,2]])
+a.transpose()
+b = np.array([[3,4,5],[4,3,2]])
+np.dot(a,b)
+
+a=np.array([1,2])
+b=np.array([1,2,3])
+c=np.array([a,a,a])
+d=np.array([b,b])
+pesos = np.array([c,d])
+pesos[-1][:,0]
+pesos
 '''
