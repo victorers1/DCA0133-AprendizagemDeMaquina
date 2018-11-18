@@ -7,9 +7,10 @@ Created on Thu Nov 15 18:49:26 2018
 """
 
 import numpy as np
+import matplotlib.pyplot as plt
 
-def ativacao(x):
-    '''Função sigmoid'''
+def sigmoid(x):
+    '''Função de ativação'''
     if type(x) != list:
         retorno = 1.0/(1.0+np.exp(-x))
     else:
@@ -18,21 +19,47 @@ def ativacao(x):
             retorno.append(1.0/(1.0+np.exp(-i)))
     return np.array(retorno)
     
-def dativacao(x):
-    '''Derivada da sigmoid'''
+def dsigmoid(x):
+    '''Derivada da ativação'''
     if type(x) != list:
-        retorno = ativacao(x)*(1-ativacao(x))
+        retorno = sigmoid(x)*(1-sigmoid(x))
     else:
         retorno = []
         for i in x:
-            retorno.append(ativacao(i)*(1-ativacao(i)))
+            retorno.append(sigmoid(i)*(1-sigmoid(i)))
     return np.array(retorno)
 
+def relu(x):
+    if type(x) != list and type(x)!=np.ndarray:
+        #print('retornando {}'.format(np.max([0,x])))
+        return np.max([0,x]) 
+    else:
+        retorno = []
+        for i in x:
+            retorno.append(np.max([0,i]))
+        #print('retornando {}'.format(retorno))
+        return np.array(retorno)
+
+def drelu(x):
+    #print('tipo de {}= {}'.format(x, type(x)))
+    if type(x)!=list and type(x)!=np.ndarray: 
+        if x >= 0:
+            return 1
+        else: 
+            return 0 
+    else:
+        retorno = []
+        for i in x:
+            if i >= 0:
+                retorno.append(1)
+            else: 
+                retorno.append(0)
+        return  np.array(retorno)
 
 class RedeNeural(object):
     '''Classe que implementa uma rede neural artificial.'''
     
-    def __init__(self, camadas):
+    def __init__(self, camadas, ativacao, dativacao):
         '''
         camadas: lista com números de neurônios em cada camada. Exemplo: [2,3,2] gera uma rede com 2 entradas, 3 neurônios na camada escondida e 2 saídas
         ativacao: nome da função de ativação usada em todas camadas. Exemplos: 'linear', 'relu', 'sigmoid', 'softmax' 
@@ -41,30 +68,21 @@ class RedeNeural(object):
         '''
         self.num_camadas = len(camadas)
         self.camadas = camadas
+        self.ativacao = ativacao; self.dativacao = dativacao
         self.vieses = [np.random.rand(y,1) for y in camadas[1:]]
         self.pesos = [np.random.randn(y,x) for x,y in zip(camadas[:-1], camadas[1:])]
-        #print('pesos iniciais=\n'+str(self.pesos))
-        #print('vieses iniciais=\n'+str(self.vieses))
         
         
     def adiante(self, entrada):
         '''Recebe uma entrada e retorna a saída da rede neural.
         entrada: lista de valores'''
-        #print('entrada mesmo=\n{}'.format(entrada))
-        #print('pesos mesmos=\n{}'.format(self.pesos))
-        #print('viese mesmos=\n{}'.format(self.vieses))
         for v,p in zip(self.vieses, self.pesos):
             prox_entrada = []  # resultado desta camada é entrada para a próxima
             for i in range(len(v)):  # não pode ser len(p)
-                #print('p[{},:]= {}; entrada= {}'.format(i, p[i,:], entrada))
-                prox_entrada.append(ativacao(np.dot(p[i,:], entrada)+v[i]))
+                prox_entrada.append(self.ativacao(np.dot(p[i,:], entrada)+v[i]))
             entrada = prox_entrada.copy()
-            #print('entrada=\n'+str(entrada))
         return np.array(entrada)
     
-    
-    def SGD(self, treino, epocas, tam_lote):
-        pass
     
     def fcusto(self, a,b):
         '''Função custo que mede o quão distante a saída está da resposta desejada. Usada para avalizar o desempenho da rede'''
@@ -81,7 +99,7 @@ class RedeNeural(object):
         (deltas) de cada neurônio. Os pesos são efetivamente atualizados noutra função.'''
         zmemo = [np.array(entrada)]  # Matriz memória1. Guardaremos todas as saídas dos neurônios antes de passar para a função de ativação
         amemo = [np.array(entrada)]  # Matriz memória2. Guardaremos todas as saídas dos neurônios depois de passar para a função de ativação. Inclui a camada de entrada.
-        
+
         #PASSADA DIRETA SALVANDO VALORES
         for v,p in zip(self.vieses, self.pesos):
             prox_entrada = []  # resultado desta camada é entrada para a próxima
@@ -89,47 +107,41 @@ class RedeNeural(object):
                 z = np.dot(p[i,:], entrada)+v[i]  # Calcula soma ponderada com viés
                 prox_entrada.append(z[0])  # 'z' é uma lista de um valor
             zmemo.append(np.array(prox_entrada))  # guarda valor antes de passá-la para função de ativ.
-            entrada = ativacao(prox_entrada) # att. entrada
+            entrada = self.ativacao(prox_entrada) # att. entrada
             amemo.append(np.array(entrada))  # guarda valores depois da ativação, não sei se será necessário ainda
         
         #converte tudo em np.array para usufruirmos de suas funções
         zmemo = np.array(zmemo)
         entrada = np.array(entrada)
         amemo = np.array(amemo)
-        #print('ativ=\n{0}'.format(amemo))
-        
+        #print('zmemo=\n{}'.format(zmemo))
+        #print('amemo=\n{}'.format(amemo))
+        #print('saida=\n{}'.format(entrada))
         #PASSADA INVERSA, RETROPROPAGAÇÃO DO ERRO
         grad_p = [np.zeros(p.shape) for p in self.pesos]
         grad_v = [np.zeros(v.shape) for v in self.vieses]
-        print('grad_v inicial= {}\n'.format(grad_v))
-        #delta da camada de saída é calculado diferentemente dos outros
-        delta = self.dcusto(gabarito, amemo[-1])*dativacao(zmemo[-1])  #conteúdo de 'amemo[-1]' é igual o de 'entrada'
-        grad_v[-1] = delta.transpose()
-        for i in range(len(grad_p[-1][0])):  # Pega primeiro elemento dos pesos da última camada
-            grad_p[-1][:,i] = (delta*amemo[-1]) # ou np.transpose()
         
+        #delta da camada de saída é calculado diferentemente dos outros
+        delta = self.dcusto(gabarito, amemo[-1])*self.dativacao(zmemo[-1])  #conteúdo de 'amemo[-1]' é igual o de 'entrada'
+        #print('delta=\n{}'.format(delta))
+        grad_v[-1] = delta[np.newaxis].T
+        for i in range(len(grad_p[-1][0])):  # Pega primeiro elemento dos pesos da última camada
+            grad_p[-1][:,i] = delta*amemo[-1]
+        
+        #print('grad_p=\n{}'.format(grad_p))
         for l in range(2, self.num_camadas):  #-l é a camada que está sendo analizada
             z = zmemo[-l]  # Valores da camada em análize antes da ativação
             a = amemo[-l]  # As ativações da camada em análise
             p = self.pesos[-l+1]  # Recupero pesos da camada seguinte
-            #print('z= {}; a= {}; p= {}'.format(z,a,p))
             # OBS: gradiente da camada seguinte já está salvo em 'delta'
             prox_delta = []  # lista com os próximos valores de delta
             for i in range(len(p[0])):  # cada iteração calcula o delta de um neurônio da camada l
-                #print('appending to prox_delta=\n{}'.format(np.dot(p[:,i], delta)*dativacao(z[i])))
-                prox_delta.append(np.dot(p[:,i], delta)*dativacao(z[i]))
-                prox_delta = np.array(prox_delta).transpose()
+                prox_delta.append(np.dot(p[:,i], delta)*self.dativacao(z[i]))  # Liga um valor real ao final de 'prox_delta'
             
-            delta = np.array(prox_delta.copy())
-            grad_v[-l] = delta.transpose()
-            #print('grad_v[-{}]= {}\n'.format(l, grad_v[-l]))
+            delta = prox_delta.copy()
+            grad_v[-l] = np.array(delta)[np.newaxis].T
             for i in range(len(grad_p[-l][0])):
                 grad_p[-l][:,i] = (delta*a)
-                
-        #print('grad_p final=\n{}'.format(grad_p))
-        for v in grad_v:
-            v = v.transpose()
-        print('grad_v final=\n{}'.format(grad_v))
         return np.array(grad_p), np.array(grad_v)
 
 
@@ -142,28 +154,46 @@ class RedeNeural(object):
         nem tratamento de erros.
         lr: taxa de aprendizagem. geralmente um valor no intervalo (0,1)
         '''
-        grad_p_acum = np.array([np.zeros(p.shape) for p in self.pesos])  # acumulado dos gradientes de várias iterações do bakcpropagation
-        grad_v_acum = np.array([np.zeros(v.shape) for v in self.vieses])
-        #print('grad_v_acum inicial=\n{}'.format(grad_v_acum))
+        n = len(mini_lote)
+        grad_p_acum = [np.zeros(p.shape) for p in self.pesos]  # acumulado dos gradientes de várias iterações do bakcpropagation
+        grad_v_acum = [np.zeros(v.shape) for v in self.vieses]
         # acumulado dos gradientes de várias iterações do backpropagation
         for x,y in zip(mini_lote[0], mini_lote[1]):
             grad_p, grad_v = self.backpropagation(x,y)
-            print('grad_v_acum=\n{0}'.format(grad_v_acum))
-            #print('grad_v=\n{0}'.format(grad_v))
             grad_p_acum = [gp+gpa for gp,gpa in zip(grad_p, grad_p_acum)]  # Realiza soma elemento a elemento entre duas lista de mesmo formado
             grad_v_acum = [gv+gva for gv,gva in zip(grad_v, grad_v_acum)]
+        self.pesos = [peso-lr/n*gradp for peso,gradp in zip(self.pesos, grad_p_acum)]
+        self.vieses = [vies-lr/n*gradv for vies,gradv in zip(self.vieses, grad_v_acum)]
+        #print('grad_p final=\n{}'.format(grad_p))
+        
+    
+    def treina(self, dados, epocas, tam_lote, lr):
+        '''
+        Implementa o algoritmo do Gradiente Estocástico Descendente
+        Atualiza os mini lotes até que todos tenham passado pelo backpropagation
+        dados_treino: lista de tuplas com formato (amostra, gabarito) cada
+        epocas: inteiro com número de épocas
+        tam_lote: inteiro com tamanho de cada mini_lote
+        lr: taxa de aprendizagem
+        '''
+        dados_treino = dados.copy()
+        #print('dados_treino=\n{}'.format(dados_treino))
+        n = len(dados_treino)
+        for e in range(epocas):
+            print('\nÉpoca {} de {}'.format(e+1, epocas))
+            np.random.shuffle(dados_treino)
+            mini_lotes = [dados_treino[k:k+tam_lote] for k in range(0, n, tam_lote)]
+            progresso = '>'
+            for lote in mini_lotes:
+                #print('lote em análise=\n{}'.format(lote))
+                print('\r[{}'.format(progresso), end='')
+                self.atualiza_lote(lote, 0.01)
+                progresso = '=' + progresso
+            print(']', end='')
             
-        
-        #print('antg pesos=\n{}'.format(self.pesos))
-        #print('antg viese=\n{}'.format(self.vieses))
-        
-        self.pesos = [peso-lr*gradp for peso,gradp in zip(self.pesos, grad_p_acum)]
-        #self.vieses = [vies-lr*gradv for vies,gradv in zip(self.vieses, grad_v_acum)]
-        #print('novo pesos=\n{}'.format(self.pesos))
-        #print('novo vieses=\n{}'.format(self.vieses))
 
 #GERANDO DADOS
-theta=np.linspace(0, 20, 2)
+theta=np.linspace(0, 20, 100)
 x1 = theta/4*np.cos(theta)
 y1 = theta/4*(np.sin(theta))
 x2 = (theta/4+.8)*np.cos(theta)
@@ -177,13 +207,49 @@ for v1,v2 in zip(x2,y2):
     y_treino.append([0,1])
 x_treino = np.array(x_treino)
 y_treino = np.array(y_treino)
+dados = []  # lista de tuplas com o par (amostra, gabarito)
+for i in range(len(x_treino)):
+    dados.append((x_treino[i], y_treino[i]))
 
-rn = RedeNeural([2,3,2])
-saida = rn.adiante(x_treino[1]); print('saida=\n{0}'.format(saida))
+rn = RedeNeural([2,60,60,60,2], sigmoid, dsigmoid)
+saida = rn.adiante(x_treino[0]); print('saida=\n{0}'.format(np.round(saida)))
+#rn.ativacao(np.array([-1,0,2]))
+#rn.dativacao(np.array([-2, -1, 0, 1, 2, 3]))
+#rn.backpropagation(np.array([0,0]), np.array([1,0]))
+#rn.atualiza_lote(dados, 0.01)
 
-rn.atualiza_lote((x_treino,y_treino), 0.1)
+rn.treina(dados=dados, epocas=30, tam_lote=20, lr=0.05)
 
-saida = rn.adiante(x_treino[1]); print('saida=\n{0}'.format(saida))
+saida = rn.adiante(x_treino[0]); print('\nsaida pós treino=\n{0}'.format(np.round(saida)))
+
+
+custo=0
+Hcusto=[]
+for d in dados:
+    result = rn.adiante(d[0])
+    custo = rn.fcusto(result, d[1].reshape(-1, 1))
+    Hcusto.append(np.sum(custo))
+
+
+plt.plot(Hcusto)
+plt.title('Análise de Custo')
+plt.xlabel('Amostra')
+plt.ylabel('Custo')
+plt.show()
+
+cont= 0
+for d in dados:
+    igual=True
+    for i,j in zip(d[1], np.round(rn.adiante(d[0]))):
+        if i!=j:
+            igual=False
+            break
+    if igual:
+        cont+=1
+    #print('gab: {} -> res: {}'.format(d[1], np.round(rn.adiante(d[0])).transpose()))
+
+print('qtd certos= {}/{}'.format(cont, len(dados)))
+
 
 
 
@@ -196,14 +262,59 @@ foo = (1, 2, 3)
 bar = (4, 5, 6)
 uniao = (foo,bar)
 
+a = np.array([1,2,3,4])
+a.transpose()
+
+a = np.array([[1],[2]])
+b = np.array([[1],[2]])
+a == b
 for (f, b) in zip(uniao[0], uniao[1]):
     print("f: "+str(f) + "; b: " + str(b))
 
 a = np.array([[1,2],[2,2],[3,2]])
-a.transpose()
+c = np.array([[2,1],[1,2],[2,3]])
+a+c
+
+import time
+
+for i in range(10): 
+    print('\r'+str(i),end='')
+    time.sleep(1)
+    
+print('opa', end='\r', flush=True)
+print('maria', flush=True)
+
 b = np.array([[3,4,5],[4,3,2]])
+b/2
 np.dot(a,b)
 
+a = '===='
+print('[{:10}>]'.format(a))
+
+from sys import stdout
+from time import sleep
+for i in range(1,20):
+    stdout.write("\r%d" % i)
+    stdout.flush()
+    sleep(1)
+stdout.write("\n") # move the cursor to the next line
+
+
+def foo(func, a, b):
+    return func(a,b)
+
+def soma(a,b):
+    return a+b
+def subt(a,b):
+    return a-b
+    
+print(foo(subt, 2,2))
+
+
+
+p = '>'
+p = '='+p
+p
 a=np.array([1,2])
 b=np.array([1,2,3])
 c=np.array([a,a,a])
