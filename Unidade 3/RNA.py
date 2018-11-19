@@ -9,9 +9,51 @@ Created on Thu Nov 15 18:49:26 2018
 import numpy as np
 import matplotlib.pyplot as plt
 
+def objetivo(n):
+    return np.sin(n+np.sin(n)**2)
+
+
+def linear(x):
+    return x
+
+def dlinear(x):
+    return linear
+
+
+def degrau(x):
+    if type(x)!=list and type(x)!=np.ndarray:
+        if x>= 0:
+            return 1
+        else:
+            return 0
+    else:
+        retorno = []
+        for i in x:
+            if i>= 0:
+                retorno.append(1)
+            else:
+                retorno.append(0)
+        return retorno
+
+def ddegrau(x):
+    if type(x)!=list and type(x)!=np.ndarray:
+        if x!= 0:
+            return 1
+        else:
+            return 0
+    else:
+        retorno = []
+        for i in x:
+            if i!= 0:
+                retorno.append(1)
+            else:
+                retorno.append(0)
+        return retorno
+
+
 def sigmoid(x):
     '''Função de ativação'''
-    if type(x) != list:
+    if type(x) != list and type(x) != np.ndarray:
         retorno = 1.0/(1.0+np.exp(-x))
     else:
         retorno = []
@@ -21,7 +63,7 @@ def sigmoid(x):
     
 def dsigmoid(x):
     '''Derivada da ativação'''
-    if type(x) != list:
+    if type(x) != list and type(x) != np.ndarray:
         retorno = sigmoid(x)*(1-sigmoid(x))
     else:
         retorno = []
@@ -29,8 +71,9 @@ def dsigmoid(x):
             retorno.append(sigmoid(i)*(1-sigmoid(i)))
     return np.array(retorno)
 
+
 def relu(x):
-    if type(x) != list and type(x)!=np.ndarray:
+    if type(x) != list and type(x) != np.ndarray:
         #print('retornando {}'.format(np.max([0,x])))
         return np.max([0,x]) 
     else:
@@ -42,7 +85,7 @@ def relu(x):
 
 def drelu(x):
     #print('tipo de {}= {}'.format(x, type(x)))
-    if type(x)!=list and type(x)!=np.ndarray: 
+    if type(x) != list and type(x) != np.ndarray: 
         if x >= 0:
             return 1
         else: 
@@ -55,6 +98,7 @@ def drelu(x):
             else: 
                 retorno.append(0)
         return  np.array(retorno)
+
 
 class RedeNeural(object):
     '''Classe que implementa uma rede neural artificial.'''
@@ -99,7 +143,8 @@ class RedeNeural(object):
         (deltas) de cada neurônio. Os pesos são efetivamente atualizados noutra função.'''
         zmemo = [np.array(entrada)]  # Matriz memória1. Guardaremos todas as saídas dos neurônios antes de passar para a função de ativação
         amemo = [np.array(entrada)]  # Matriz memória2. Guardaremos todas as saídas dos neurônios depois de passar para a função de ativação. Inclui a camada de entrada.
-
+        print('zmemo=\n{}'.format(zmemo))
+        print('amemo=\n{}'.format(amemo))
         #PASSADA DIRETA SALVANDO VALORES
         for v,p in zip(self.vieses, self.pesos):
             prox_entrada = []  # resultado desta camada é entrada para a próxima
@@ -109,7 +154,7 @@ class RedeNeural(object):
             zmemo.append(np.array(prox_entrada))  # guarda valor antes de passá-la para função de ativ.
             entrada = self.ativacao(prox_entrada) # att. entrada
             amemo.append(np.array(entrada))  # guarda valores depois da ativação, não sei se será necessário ainda
-        
+        print('entrada=\n{}'.format(entrada))
         #converte tudo em np.array para usufruirmos de suas funções
         zmemo = np.array(zmemo)
         entrada = np.array(entrada)
@@ -191,7 +236,7 @@ class RedeNeural(object):
                 progresso = '=' + progresso
             print(']', end='')
             
-
+'''
 #GERANDO DADOS
 theta=np.linspace(0, 20, 100)
 x1 = theta/4*np.cos(theta)
@@ -210,15 +255,31 @@ y_treino = np.array(y_treino)
 dados = []  # lista de tuplas com o par (amostra, gabarito)
 for i in range(len(x_treino)):
     dados.append((x_treino[i], y_treino[i]))
+'''
 
-rn = RedeNeural([2,60,60,60,2], sigmoid, dsigmoid)
+n=100  # Índice temporal do valor que será previsto 
+qtd_pts = 50  # quantos valores há em cada amostra
+qtd_amostra = 500  # quantas amostras serão usadas para treinar
+x_treino,y_treino = [],[]
+
+for i in range(qtd_amostra):
+    ind = np.arange(n-i-1-qtd_pts, n-i-1) # índices temporais
+    x_treino.append(objetivo(ind))
+    y_treino.append(objetivo(n-i-1))
+x_treino = np.array(x_treino)
+y_treino = np.array(y_treino)
+dados = []  # lista de tuplas com o par (amostra, gabarito)
+for i in range(len(x_treino)):
+    dados.append((x_treino[i], y_treino[i]))
+
+rn = RedeNeural([qtd_pts,128,128,128,1], sigmoid, dsigmoid)
 saida = rn.adiante(x_treino[0]); print('saida=\n{0}'.format(np.round(saida)))
 #rn.ativacao(np.array([-1,0,2]))
 #rn.dativacao(np.array([-2, -1, 0, 1, 2, 3]))
 #rn.backpropagation(np.array([0,0]), np.array([1,0]))
 #rn.atualiza_lote(dados, 0.01)
 
-rn.treina(dados=dados, epocas=30, tam_lote=20, lr=0.05)
+rn.treina(dados=dados, epocas=30, tam_lote=10, lr=0.01)
 
 saida = rn.adiante(x_treino[0]); print('\nsaida pós treino=\n{0}'.format(np.round(saida)))
 
